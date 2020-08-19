@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var initialLocaleCode = 'zh-cn';
-  var localeSelectorEl = document.getElementById('locale-selector');
-  var calendarEl = document.getElementById('calendar');
+  const initialLocaleCode = 'zh-cn';
+  const calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     headerToolbar: {
@@ -15,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     navLinks: true, // can click day/week names to navigate views
     editable: true,
     dayMaxEvents: true, // allow "more" link when too many events
-    events: 'https://fullcalendar.io/demo-events.json?overload-day',
+    events: 'https://fullcalendar.io/demo-events.json?overload-day', //事件列表
     dateClick: function (info, event) {
       //点击日期
       console.log('Clicked on: ' + info.dateStr);
@@ -26,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
       addTags()
       // change the day's background color just for fun
       info.dayEl.style.backgroundColor = 'red';
-
-
     },
     eventClick: function (info, event) {
       //点击日程
@@ -46,17 +43,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //增加日程
   function addTags() {
-    var date = new Date('2020-08-20T00:00:00'); // will be in local time
+    const date = new Date('2020-08-20T09:00:00'); // will be in local time
+    const dateEnd = new Date('2020-08-20T10:00:00'); // will be in local time
     calendar.addEvent({
       id:'jam',
-      title: '增加日程',
+      title: '增加日程测试',
       start: date,
-      allDay: true
+      end: dateEnd,
+      allDay: false
     });
   }
   //移出日程
   function removeTag(){
-    var jam = calendar.getEventById('jam') // an event object!
+    const jam = calendar.getEventById('jam') // an event object!
     jam.remove()
   }
 });
